@@ -17,5 +17,87 @@ package apl2;
 public class Node {
 	
 	// TODO: Implementar a classe conforme o enunciado da atividade Apl2.
-	
+	private String id;
+    private String nome;
+    private Float nota;
+
+    private Node previous;
+    private Node next;
+
+    public Node(){
+        id = null;
+        nome = "";
+        nota = 99.9F;
+        previous = null;
+        next = null;
+    }
+
+    public Node(Integer id, String nome, Float nota, Node previous, Node next) {
+        this.id = "23.S1-" + id;
+        this.nome = nome;
+        this.nota = nota;
+        this.previous = previous;
+        this.next = next;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = "23.S1-" + id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Float getNota() {
+        return nota;
+    }
+
+    public void setNota(Float nota) {
+        this.nota = nota;
+    }
+
+    public Node getPrevious() {
+        return previous;
+    }
+
+    public void setPrevious(Node previous) {
+        this.previous = previous;
+    }
+
+    public Node getNext() {
+        return next;
+    }
+
+    public void setNext(Node next) {
+        this.next = next;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        String idPrevious = null;
+        String idNext = null;
+
+        if (previous != null){
+            idPrevious = previous.getId();
+        }
+        if (next != null){
+            idNext = next.getId();
+        }
+
+        sb.append(idPrevious)
+                .append(" <- (")
+                .append(getId()).append(";").append(getNome()).append(";").append(nota)
+                .append(") -> ").append(idNext);
+
+        return sb.toString();
+    }
 }
