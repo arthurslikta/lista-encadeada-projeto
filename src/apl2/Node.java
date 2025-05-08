@@ -32,7 +32,7 @@ public class Node {
         next = null;
     }
 
-    public Node(Integer id, String nome, Float nota, Node previous, Node next) {
+    public Node(String id, String nome, Float nota, Node previous, Node next) {
         this.id = "23.S1-" + id;
         this.nome = nome;
         this.nota = nota;
@@ -44,7 +44,7 @@ public class Node {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = "23.S1-" + id;
     }
 

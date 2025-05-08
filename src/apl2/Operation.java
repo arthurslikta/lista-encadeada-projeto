@@ -7,6 +7,7 @@
 
 package apl2;
 
+
 public class Operation {
 
 	/**
@@ -19,8 +20,29 @@ public class Operation {
 	 * @return Uma nova {@code DLinkedList} que contém o mapeamento da coleção de dados {@code original} para a nova estrutura usada pelo sistema de notas. 
 	 */
 	public static DLinkedList map(final LinkedListOriginal original) {
-		// TODO: Implementar o método e remover o lançamento de exceção abaixo.
-		throw new UnsupportedOperationException("Método ainda não implementado.");
+		DLinkedList newLinkedList = new DLinkedList();
+		NodeOriginal nodeOriginal = original.getHead();
+
+		while (nodeOriginal != null){
+			String newId = String.valueOf(nodeOriginal.getId());
+			String nome = nodeOriginal.getNome();
+			Float nota = 99.9f;
+
+			if (nodeOriginal.getInteiro() != -1){
+				if (nodeOriginal.getDecimo() != -1){
+					String notaString =
+							String.valueOf(nodeOriginal.getInteiro()) +
+							"." +
+							String.valueOf(nodeOriginal.getDecimo());
+					nota = Float.valueOf(notaString);
+				}
+			}
+
+			newLinkedList.append(newId, nome, nota);
+			nodeOriginal = nodeOriginal.getNext();
+		}
+
+		return newLinkedList;
 	}
 
 	/**

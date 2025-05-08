@@ -33,18 +33,50 @@ public class DLinkedList {
 // OPERAÇÃO:		insert(<dados da pessoa>)
 // COMPORTAMENTO:	Aloca um Node que contém os <dados da pessoa> e insere o
 //					novo nó no início da lista.
-	public void insert(/*dados da pessoa*/) {
-		// TODO: Implementar o método e remover o lançamento de exceção abaixo.
-		throw new UnsupportedOperationException("Método ainda não implementado.");
+	public void insert(String id, String nome, Float nota) {
+		Node newHead = new Node();
+		newHead.setId(id);
+		newHead.setNome(nome);
+		newHead.setNota(nota);
+
+		//se a lista não estiver vazia, atualiza coloca o antigo head na posicao seguinte
+		if (getHead() != null || !isEmpty()){
+			//coloca o novo head como o anterior do antigo
+			getHead().setPrevious(newHead);
+
+			//coloca o antigo head como o proximo do novo
+			newHead.setNext(getHead());
+		}
+		// se estiver vazia, coloca o head como tail
+		else {
+			tail = newHead;
+		}
+
+		head = newHead;
+		count++;
 	}
 
 
 // OPERAÇÃO:		append(<dados da pessoa>)
 // COMPORTAMENTO:	Aloca um Node que contém os <dados da pessoa> e insere o
 //					novo nó no final da lista.
-	public void append(/*dados da pessoa*/) {
-		// TODO: Implementar o método e remover o lançamento de exceção abaixo.
-		throw new UnsupportedOperationException("Método ainda não implementado.");
+	public void append(String id, String nome, Float nota) {
+		Node newNode = new Node();
+		newNode.setId(id);
+		newNode.setNota(nota);
+		newNode.setNome(nome);
+
+		if (isEmpty()){
+			head = newNode;
+		}
+
+		else {
+			newNode.setPrevious(tail);
+			tail.setNext(newNode);
+		}
+
+		tail = newNode;
+		count++;
 	}
 
 
@@ -53,8 +85,26 @@ public class DLinkedList {
 //					nó removido.
 //					Ou retorna null caso a lista esteja vazia.
 	public Node removeHead() {
-		// TODO: Implementar o método e remover o lançamento de exceção abaixo.
-		throw new UnsupportedOperationException("Método ainda não implementado.");
+		if (isEmpty()) return null;
+		if (getHead() == null) return null;
+
+		Node theHead = getHead();
+
+		count--;
+
+		if (theHead.getNext() == null) {
+			head = null;
+			tail = null;
+
+			return theHead;
+		}
+
+		Node newHead = head.getNext();
+
+		newHead.setPrevious(null);
+		head = newHead;
+
+		return theHead;
 	}
 
 
@@ -63,8 +113,31 @@ public class DLinkedList {
 //					nó removido.
 //					Ou retorna null caso a lista esteja vazia.
 	public Node removeTail() {
-		// TODO: Implementar o método e remover o lançamento de exceção abaixo.
-		throw new UnsupportedOperationException("Método ainda não implementado.");
+		//se estiver vazio retorna null
+		if (isEmpty()){
+			return null;
+		}
+
+		//armazena o tail em um Node
+		Node nodeToRemove = tail;
+
+		//armazena o anterior do tail em um node
+		Node tailPrevious = tail.getPrevious();
+
+		//se existir, coloca como nulo o proximo endereco
+		if (tailPrevious != null){
+			tailPrevious.setNext(null);
+		}
+
+		// atualiza o tail
+		tail = tailPrevious;
+
+		if (count <= 2) {
+			head = tailPrevious;
+		}
+		count--;
+
+		return nodeToRemove;
 	}
 
 
@@ -136,8 +209,18 @@ public class DLinkedList {
 //					exemplo do método toString() da classe LinkedListOriginal).
 	@Override
 	public String toString() {
-		// TODO: Implementar o método e remover o lançamento de exceção abaixo.
-		throw new UnsupportedOperationException("Método ainda não implementado.");
+		StringBuilder sb = new StringBuilder();
+		sb.append("(");
+		sb.append(count);
+		sb.append(")\n");
+		Node node = head;
+		while (node != null){
+			sb.append(node.toString());
+			sb.append("\n");
+			node = node.getNext();
+		}
+
+		return sb.toString();
 	}
 
 }
