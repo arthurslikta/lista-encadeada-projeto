@@ -55,8 +55,18 @@ public class Operation {
 	 * @return Uma nova {@code DLinkedList} que contém a coleção de dados ({@code data}) filtrada com nós que possuem apenas pessoas com notas válidas.
 	 */
 	public static DLinkedList filterRemoveNonGraded(final DLinkedList data) {
-		// TODO: Implementar o método e remover o lançamento de exceção abaixo.
-		throw new UnsupportedOperationException("Método ainda não implementado.");
+		DLinkedList dataFiltered = new DLinkedList();
+
+		Node headData = data.getHead();
+
+		while (headData != null){
+			if (headData.getNota() <= 10.0f){
+				dataFiltered.append(headData.getId(), headData.getNome(), headData.getNota());
+			}
+			headData = headData.getNext();
+		}
+
+		return dataFiltered;
 	}
 
 	/**
@@ -69,8 +79,18 @@ public class Operation {
 	 * @return Uma nova {@code DLinkedList} que contém a coleção de dados ({@code data}) filtrada com nós que possuem apenas pessoas com notas inválidas.
 	 */
 	public static DLinkedList filterRemoveGraded(final DLinkedList data) {
-		// TODO: Implementar o método e remover o lançamento de exceção abaixo.
-		throw new UnsupportedOperationException("Método ainda não implementado.");
+		DLinkedList dataFiltered = new DLinkedList();
+
+		Node headData = data.getHead();
+
+		while (headData != null){
+			if (headData.getNota() == 99.9f){
+				dataFiltered.append(headData.getId(), headData.getNome(), headData.getNota());
+			}
+			headData = headData.getNext();
+		}
+
+		return dataFiltered;
 	}
 
 	/**
@@ -85,8 +105,18 @@ public class Operation {
 	 * @return Uma nova {@code DLinkedList} que contém a coleção de dados ({@code data}) filtrada somente com pessoas com notas maiores do que {@code average}.
 	 */
 	public static DLinkedList filterRemoveBelowAverage(final DLinkedList data, float average) {
-		// TODO: Implementar o método e remover o lançamento de exceção abaixo.
-		throw new UnsupportedOperationException("Método ainda não implementado.");
+		DLinkedList dataFiltered = new DLinkedList();
+
+		Node theHead = data.getHead();
+
+		while(theHead != null){
+			if (theHead.getNota() < average){
+				dataFiltered.append(theHead.getId(), theHead.getNome(), theHead.getNota());
+			}
+			theHead = theHead.getNext();
+		}
+
+		return dataFiltered;
 	}
 	
 	/**
