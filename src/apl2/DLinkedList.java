@@ -15,7 +15,6 @@ package apl2;
 // comportamento descrito em cada operação.
 
 public class DLinkedList {
-	// TODO: Implementar a classe conforme o enunciado da atividade Apl2.
 	private Node head;
 	private Node tail;
 	private int count;
@@ -23,7 +22,6 @@ public class DLinkedList {
 // OPERAÇÃO:		Método construtor
 // COMPORTAMENTO:	Cria uma lista vazia.
 	public DLinkedList() {
-		// TODO: Implementar o método e remover o lançamento de exceção abaixo.
 		head = null;
 		tail = null;
 		count = 0;
@@ -193,8 +191,11 @@ public class DLinkedList {
 // COMPORTAMENTO:	Retorna uma referência para o nó do final da lista.
 //					Ou retorna null caso a lista esteja vazia.
 	public Node getTail() {
-		// TODO: Implementar o método e remover o lançamento de exceção abaixo.
-		throw new UnsupportedOperationException("Método ainda não implementado.");
+		if (isEmpty()){
+			return null;
+		}
+
+		return tail;
 	}
 
 
@@ -203,10 +204,19 @@ public class DLinkedList {
 //					da lista.
 //					Ou retorna null caso não exista um nó com <ID da pessoa>.
 	public Node getNode(String id) {
-		// TODO: Implementar o método e remover o lançamento de exceção abaixo.
-		throw new UnsupportedOperationException("Método ainda não implementado.");
-	}
+        if (isEmpty()) {
+            return null;
+        }
 
+        Node temp = head; // variavel comeca pelo primeiro no
+        while (temp != null) {
+            if (temp.getId().equals(id)) { // se o id for igual retorna a referencia para o no
+                return temp;
+            }
+            temp = temp.getNext(); // se nao for igual a referencia passa a ser o proximo no
+        }
+        return null; // se o id nao for encontrado retorna null
+    }
 
 // OPERAÇÃO:		count()
 // COMPORTAMENTO:	Retorna a quantidade de nós da lista.
@@ -225,9 +235,21 @@ public class DLinkedList {
 // OPERAÇÃO:		clear()
 // COMPORTAMENTO:	Esvazia a lista, liberando a memória de todos os nós da lista.
 	public void clear() {
-		// TODO: Implementar o método e remover o lançamento de exceção abaixo.
-		throw new UnsupportedOperationException("Método ainda não implementado.");
-	}
+        Node temp = head; // variavel comeca pelo primeiro no
+        while (temp != null) { 
+            Node next = temp.getNext(); // guarda a referencia para o proximo no
+            temp.setPrevious(null); // o no atual nao aponta mais para o anterior
+            temp.setNext(null); // o no atual nao aponta mais para o proximo
+            temp = next; // referencia agora eh o proximo no
+        }
+
+		// torna a lista vazia
+        head = null;
+        tail = null;
+
+		// contador volta para 0
+        count = 0;
+    }
 
 
 // OPERAÇÃO:		toString()
